@@ -1,0 +1,17 @@
+require('dotenv').config()
+require('colors')
+const path = require('path')
+const root = path.join(__dirname, '..', '..')
+const createWebpackIndex = require('./create-webpack')
+const createNodeIndex = require('./create-node')
+
+console.log('Create index building...'.blue)
+;(async function () {
+  await createWebpackIndex([root, 'models', 'data'], 'Model')
+  await createWebpackIndex([root, 'models', 'proto'], 'Model')
+  await createWebpackIndex([root, 'components', 'icon', 'pattern'])
+  await createWebpackIndex([root, 'plugins', 'i18n', 'lang'])
+  await createNodeIndex([root, 'auto', 'function'])
+  await createNodeIndex([root, 'auto', 'svg', 'pattern'])
+  console.log('build finish'.blue)
+})()
